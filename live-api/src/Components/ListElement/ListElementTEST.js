@@ -8,8 +8,8 @@ import "./ListElementTEST.css";
 function ListElement(props) {
   /* Collapse is a component availably within ListElement only
    */
-  const Collapse = ({ collapsed, children }) => {
-    const [isCollapsed, setIsCollapsed] = React.useState(!collapsed);
+  const Collapse = ({ children }) => {
+    const [isCollapsed, setIsCollapsed] = React.useState(true);
 
     return (
       <>
@@ -35,11 +35,11 @@ function ListElement(props) {
     <div className="list-element-container" id={props.id}>
       <div className="left-container">
         <Collapse>
-          <a href={props.apiUrl} target="_blank">
+          <a href={props.apiUrl} target="_blank" rel="noreferrer">
             <p>{props.apiUrl}</p>
           </a>
           <div>{JSON.stringify(JSON.parse(props.jsonExample))}</div>
-          <a href={props.docsUrl} target="_blank">
+          <a href={props.docsUrl} target="_blank" rel="noreferrer">
             <button className="docslink">Link to documentation</button>
           </a>
         </Collapse>

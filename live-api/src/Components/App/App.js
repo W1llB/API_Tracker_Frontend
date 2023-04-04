@@ -27,7 +27,7 @@ function App() {
     /* This code block is executed periodically to refresh the page by manipulating "count" on which the next
      * useEffect block is dependant */
     setCount(count + 1);
-  }, 300000); // passing null instead of 1000 will cancel the interval if it is already running
+  }, 15000); // passing null instead of 1000 will cancel the interval if it is already running
 
   useEffect(() => {
     /* If we're in this block of code then either it's time to update the page because the time period elapsed
@@ -47,19 +47,18 @@ function App() {
     if (JSON.stringify(newApi) !== "{}") {
       async function postData() {
         const newApiJson = JSON.stringify(newApi);
-        console.log(newApiJson);
         /* we post to the API with the data in the fields */
         const response = await fetch("http://localhost:3001/api/", {
           method: "POST",
           body: newApiJson,
           mode: "cors",
           headers: {
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         });
       }
       postData();
-      setCount(count+1)
+      setCount(count + 1);
     }
   }, [newApi]);
 
@@ -68,23 +67,21 @@ function App() {
    */
   useEffect(() => {
     async function deleteApi() {
-      console.log('id:', del)
       const response = await fetch(`http://localhost:3001/api/${del}`, {
         method: "DELETE",
         mode: "cors",
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       });
     }
-    deleteApi(); 
-    setCount(count+1)
+    deleteApi();
+    setCount(count + 1);
   }, [del]);
 
   /* Perhaps we could do away with all these functions and call the state handlers directly? */
   function handleDelete(id) {
     setDel(id);
-    console.log(id);
   }
 
   function handleChangeUrl(e) {
@@ -100,11 +97,9 @@ function App() {
   }
 
   function handleClick() {
-    console.log("handleClick(): ", url, apiName, docsLink);
     setNewApi({ api_url: url, api_name: apiName, doclink: docsLink });
   }
 
-  console.log(newApi);
   return (
     <div className="app-container">
       <Header />
