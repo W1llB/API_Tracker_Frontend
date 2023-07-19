@@ -23,23 +23,32 @@ function App() {
   /* A variable to trigger the removal of an API entry.  Del would be set to the id of the entry in question */
   const [del, setDel] = useState("");
 
-  useInterval(() => {
-    /* This code block is executed periodically to refresh the page by manipulating "count" on which the next
-     * useEffect block is dependant */
-    setCount(count + 1);
-  }, 15000); // passing null instead of 1000 will cancel the interval if it is already running
+  const evtSource = new EventSource(
+    "http://localhost:3001/sse" /*, {
+    withCredentials: true,
+  }*/
+  );
 
-  useEffect(() => {
-    /* If we're in this block of code then either it's time to update the page because the time period elapsed
-     * or something was added or deleted from the list
-     */
-    async function getData() {
-      const response = await fetch("http://localhost:3001/api/");
-      const data = await response.json();
-      setApiArray(data.payload);
-    }
-    getData();
-  }, [count]);
+  evtSource.onmessage = (event) => {
+    console.log(JSON.parse(event.data));
+  };
+  // useInterval(() => {
+  //   /* This code block is executed periodically to refresh the page by manipulating "count" on which the next
+  //    * useEffect block is dependant */
+  //   setCount(count + 1);
+  // }, 15000); // passing null instead of 1000 will cancel the interval if it is already running
+
+  // useEffect(() => {
+  //   /* If we're in this block of code then either it's time to update the page because the time period elapsed
+  //    * or something was added or deleted from the list
+  //    */
+  //   async function getData() {
+  //     const response = await fetch("http://localhost:3001/api/");
+  //     const data = await response.json();
+  //     setApiArray(data.payload);
+  //   }
+  //   getData();
+  // }, [count]);
 
   useEffect(() => {
     /* If the add button was clicked we're here*/
