@@ -1,5 +1,5 @@
 import "./ListOfApis.css";
-import ListElementTEST from "../ListElement/ListElement";
+import ListElement from "../ListElement/ListElement";
 
 /* ListOfApis takes props.apiArray and calls ListElement on each (object) entry to build the list
  */
@@ -8,8 +8,9 @@ function ListOfApis(props) {
     <div className="list-container">
       {props.apiArray.map((element) => {
         return (
-          <ListElementTEST
+          <ListElement
             id={element.api_id}
+            key={element.api_id}
             apiName={element.api_name}
             apiUrl={element.api_url}
             docsUrl={element.docs_url}
