@@ -1,5 +1,5 @@
 import "./ListOfApis.css";
-import ListElementTEST from "../ListElement/ListElementTEST";
+import ListElementTEST from "../ListElement/ListElement";
 
 /* ListOfApis takes props.apiArray and calls ListElement on each (object) entry to build the list
  */
@@ -12,10 +12,11 @@ function ListOfApis(props) {
             id={element.api_id}
             apiName={element.api_name}
             apiUrl={element.api_url}
-            jsonExample={element.json} // jsonExample=<pre>{JSON.stringify(element, null, 2)}</pre>
-            docsUrl={element.doclink}
-            response_code={element.response_code}
-            get={element.get}
+            docsUrl={element.docs_url}
+            responseCode={element.response_code}
+            status={element.status}
+            lastDowntime={element.last_downtime}
+            tags={element.tags}
             handleDelete={props.handleDelete}
           />
         );
